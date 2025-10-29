@@ -35,7 +35,9 @@ Route::prefix('aula')->group(function () {
 Route::prefix('materia_grupo')->group(function () {
     // Crear materia
     Route::post('/materia', [GestionarMateriaGrupoController::class, 'crearMateria']);
-    // ver materias
+    //ver materas
+    Route::get('/materias', [GestionarMateriaGrupoController::class, 'listarMaterias']);
+    // ver materias con grupos
     Route::get('/materia', [GestionarMateriaGrupoController::class, 'verMaterias']);
     // Editar materia
     Route::put('/materia/{id}', [GestionarMateriaGrupoController::class, 'editarMateria']);

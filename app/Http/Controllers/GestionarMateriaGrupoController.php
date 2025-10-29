@@ -262,4 +262,17 @@ class GestionarMateriaGrupoController extends Controller
         'relacion_id' => $id
     ]);
 }
+public function listarMaterias()
+{
+    $materias = DB::table('materia')
+        ->select('id', 'nombre')
+        ->orderBy('nombre')
+        ->get();
+
+    return response()->json([
+        'success' => true,
+        'data' => $materias
+    ]);
+}
+
 }
