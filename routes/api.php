@@ -52,6 +52,8 @@ Route::prefix('materia_grupo')->group(function () {
     // Desasignar grupo de materia
     Route::delete('/materia/{materia_id}/grupo/{grupo_id}', [GestionarMateriaGrupoController::class, 'desasignarGrupo']);
     Route::get('/vinculados', [GestionarMateriaGrupoController::class, 'verMateriasConGrupos']);
+    //Asignar materia a profesor
+    Route::post('/asignar-materia-profesor', [GestionarMateriaGrupoController::class, 'asignarMateriaAProfesor']);
 });
 
 // Rutas API de gestionar horarios
