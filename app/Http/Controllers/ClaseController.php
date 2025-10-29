@@ -20,14 +20,25 @@ class ClaseController extends Controller
 {
     $request->validate([
         'id_profesor_materia_grupo' => 'required|integer',
-        'id_aula' => 'required|exists:aula,id',
+        'numero_aula' => 'required|integer|exists:aula,numero',
         'fecha' => 'required|date',
         'id_horario' => 'nullable|exists:horario,id',
     ]);
 
+    // Buscar el ID del aula por su número
+    $aula = DB::table('aula')->where('numero', $request->numero_aula)->first();
+
+    if (!$aula) {
+        return response()->json([
+            'success' => false,
+            'message' => 'El número de aula no existe'
+        ], 422);
+    }
+
+    // Insertar clase usando el ID del aula encontrado
     $clase_id = DB::table('clase')->insertGetId([
         'id_profesor_materia_grupo' => $request->id_profesor_materia_grupo,
-        'id_aula' => $request->id_aula,
+        'id_aula' => $aula->id,
         'fecha' => $request->fecha,
         'id_horario' => $request->id_horario,
     ]);
@@ -38,7 +49,6 @@ class ClaseController extends Controller
         'clase_id' => $clase_id
     ]);
 }
-
 // Obtener aulas y docentes vinculados a clases
 public function aula_docente()
 {
