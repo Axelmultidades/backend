@@ -69,4 +69,25 @@ public function aula_docente()
         'data' => $clases
     ]);
 }
+// Listar relaciones profesor-materia-grupo
+public function listarRelacionesPMG()
+{
+    $datos = DB::table('profesor_materia_grupo')
+        ->join('profesor_materia', 'profesor_materia_grupo.id_profesor_materia', '=', 'profesor_materia.id')
+        ->join('profesor', 'profesor_materia.ci_profesor', '=', 'profesor.ci')
+        ->join('materia', 'profesor_materia.id_materia', '=', 'materia.id')
+        ->join('grupo', 'profesor_materia_grupo.id_grupo', '=', 'grupo.id')
+        ->select(
+            'profesor_materia_grupo.id as id',
+            'profesor.nombre as profesor',
+            'materia.nombre as materia',
+            'grupo.nombre as grupo'
+        )
+        ->get();
+
+    return response()->json([
+        'success' => true,
+        'data' => $datos
+    ]);
+}
 }

@@ -70,6 +70,7 @@ Route::prefix('horario')->group(function () {
 //ruta de api clase
 Route::get('/clases', [ClaseController::class, 'aula_docente']);
 Route::post('/clases', [ClaseController::class, 'store']);
+Route::get('/clases/profesor-materia-grupo', [ClaseController::class, 'listarRelacionesPMG']);
 // Ruta de prueba de conexión a la base de datos
 Route::get('/test-db', function () {
     return \DB::select('SELECT 1 AS test');
