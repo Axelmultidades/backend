@@ -19,13 +19,12 @@ class ClaseController extends Controller
     public function store(Request $request)
 {
     $request->validate([
-        'ci_profesor' => 'required|exists:profesor,ci',
+        'id_profesor_materia_grupo' => 'required|integer',
         'id_aula' => 'required|exists:aula,id',
         'fecha' => 'required|date',
         'id_horario' => 'nullable|exists:horario,id',
     ]);
 
-    // Insertar clase
     $clase_id = DB::table('clase')->insertGetId([
         'id_profesor_materia_grupo' => $request->id_profesor_materia_grupo,
         'id_aula' => $request->id_aula,
