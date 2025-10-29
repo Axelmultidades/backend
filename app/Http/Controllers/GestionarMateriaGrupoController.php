@@ -252,7 +252,7 @@ class GestionarMateriaGrupoController extends Controller
 
     // Insertar nueva relación
     $id = DB::table('profesor_materia')->insertGetId([
-        'id_profesor' => $request->id_profesor,
+        'ci_profesor' => $request->ci_profesor,
         'id_materia' => $request->id_materia,
     ]);
 
