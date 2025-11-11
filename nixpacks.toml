@@ -10,7 +10,7 @@ nixpkgs = [
 
 [phases.build]
 cmds = [
-  "composer install --optimize-autoloader --no-scripts --no-interaction"
+  "composer install --ignore-platform-req=ext-gd"
 ]
 
 [start]
