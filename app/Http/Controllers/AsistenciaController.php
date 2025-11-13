@@ -23,6 +23,9 @@ class AsistenciaController extends Controller
 {
     $usuarioCI = $request->input('ci');
 
+    if (!$request->has('ci')) {
+        return response()->json(['error' => 'CI no recibido'], 400);
+    }
     if (!$usuarioCI) {
         return response()->json(['error' => 'No autenticado'], 401);
     }
